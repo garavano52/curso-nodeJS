@@ -12,3 +12,8 @@ const ProductSchema = Schema( {
 })
 
 module.exports = mongoose.model('Producto', ProductSchema)
+
+
+
+
+

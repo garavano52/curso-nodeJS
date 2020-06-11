@@ -1,4 +1,24 @@
 'use strict'
+
+const config   = require('./config')
+const app      = require('./app')
+const mongoose = require('mongoose');
+
+mongoose.set('useNewUrlParser', true)
+mongoose.set('useUnifiedTopology', true)  
+
+mongoose.connect(config.db,  (err, res) => {
+    if (err) {
+        return console.log(`Error al conectar a la base de datos: ${err}`)
+    }
+    console.log('Conexióm a la base de datos establecida...')
+    app.listen(config.port, () => { 
+        console.log(`API REST corriendo en htp://localhost:${config.port}`)
+    })
+}) 
+ 
+
+/* 'use strict'     // Código Anterior sin modularizar nada. Todo junto
 var express    = require('express');
 var bodyParser = require('body-parser')
 var mongoose   = require('mongoose');
@@ -20,7 +40,7 @@ app.get('/api/product/:productId', (req, res) => {
         if (err) return res.status(500).send({ message: `Error al realizar la petición: ${err}` })
         if (!producto) return res.status(404).send( { message: 'El producto no existe.' } )
         res.status(200).send( { producto } )
-        /* res.status(200).send( { producto: producto } ) // Es lo mismo que arriba por ES6 */
+        /* res.status(200).send( { producto: producto } ) // Es lo mismo que arriba por ES6 
     })
 })
 
@@ -66,10 +86,6 @@ app.post('/api/product', (req, res) => {
     })
 })
 
-/* app.get('/hola/:name', (req, res) => {
-    res.send( { message: `Hola ${req.params.name}` } )
-}) */
-
 mongoose.connect('mongodb://localhost:27017/shop',  (err, res) => {
     if (err) {
         return console.log(`Error al conectar a la base de datos: ${err}`)
@@ -78,7 +94,8 @@ mongoose.connect('mongodb://localhost:27017/shop',  (err, res) => {
     app.listen(port, () => {
         console.log(`API REST corriendo en htp://localhost:${port}`)
     })
-})
+}) */
+
 
 
 
